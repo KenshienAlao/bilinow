@@ -14,10 +14,11 @@ export default function NotFound() {
         Page Not Found
       </h1>
       <p className="mb-8 max-w-md text-muted-foreground">
-        Sorry, we couldn't find the page you're looking for. It might have been
-        moved or doesn't exist.
+        Sorry, we couldn&apos;t find the page you&apos;re looking for. It might
+        have been moved or doesn&apos;t exist.
       </p>
       <button
+        type="button"
         onClick={() => router.back()}
         className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:scale-105 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
       >

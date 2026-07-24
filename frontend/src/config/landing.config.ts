@@ -2,14 +2,17 @@ import {
   BookOpen,
   Dumbbell,
   Gamepad2,
+  HeartHandshake,
   Lock,
   Package,
   Search,
+  ShieldCheck,
   Shirt,
   ShoppingBasket,
   ShoppingCart,
   Sofa,
   Sparkles,
+  Zap,
 } from "lucide-react";
 
 export const LANDING_NAVLINKS = [
@@ -93,5 +96,28 @@ export const CATEGORIES = [
     name: "Books",
     tag: "Quiet hours",
     image: "/books.png" as string,
+  },
+];
+
+export const PILLARS = [
+  {
+    icon: Sparkles,
+    title: "Simple to Use",
+    desc: "Browse products, add items to your cart, and shop with an easy-to-use interface.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Secure Checkout",
+    desc: "Designed with secure authentication and safe online payment support.",
+  },
+  {
+    icon: Zap,
+    title: "Fast Performance",
+    desc: "Built with modern web technologies for a smooth and responsive experience.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Made for Everyone",
+    desc: "A clean and user-friendly design that makes online shopping simple.",
   },
 ];

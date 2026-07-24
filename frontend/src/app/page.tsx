@@ -2,6 +2,7 @@ import { Categories } from "@/components/landing/categories";
 import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/howitworks";
 import { Navbar } from "@/components/landing/navbar";
+import { WhyBiliNow } from "@/components/landing/whybilinow";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <Hero />
         <HowItWorks />
         <Categories />
+        <WhyBiliNow />
       </main>
     </div>
   );
