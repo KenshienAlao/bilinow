@@ -1,3 +1,4 @@
+import { Categories } from "@/components/landing/categories";
 import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/howitworks";
 import { Navbar } from "@/components/landing/navbar";
@@ -9,6 +10,7 @@ export default function Home() {
       <main>
         <Hero />
         <HowItWorks />
+        <Categories />
       </main>
     </div>
   );

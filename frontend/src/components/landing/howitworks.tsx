@@ -10,14 +10,12 @@ export function HowItWorks() {
               How it works
             </span>
             <h2 className="mt-3 text-4xl font-black leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-              From "I want it" to
-              <span className="text-gradient"> "it's here" </span>
-              in four moves.
+              Shop in
+              <span className="text-gradient"> 4 Easy Steps</span>
             </h2>
             <p className="mt-5 text-base text-muted-foreground">
-              A checkout flow designed to disappear. Every step tuned to remove
-              friction, so shopping feels less like a task and more like a
-              breath.
+              Shopping with BiliNow is simple. Browse products, place your
+              order, and wait for it to arrive at your doorstep.
             </p>
           </div>
 
@@ -39,7 +37,7 @@ export function HowItWorks() {
                   </div>
                   <div className="flex items-baseline gap-3">
                     <span className="text-xs font-mono font-bold tracking-widest text-primary/60">
-                      STEP {String(i + 1).padStart(2, "0")}
+                      STEP {i + 1}
                     </span>
                   </div>
                   <h3 className="mt-1 text-xl font-bold text-foreground">

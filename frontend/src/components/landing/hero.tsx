@@ -1,4 +1,4 @@
-import { ArrowRight, Star, Truck, ShieldCheck } from "lucide-react";
+import { ArrowRight, Truck, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { SECTION_ID } from "@/config/landing.config";
