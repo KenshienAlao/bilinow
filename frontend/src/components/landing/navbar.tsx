@@ -33,7 +33,7 @@ export function Navbar() {
         <a href="#home" className="flex items-center gap-2">
           <span className="grid h-9 w-9 place-items-center">
             <Image
-              src="/favicon.ico"
+              src="/favicon.png"
               alt="BiliNow logo"
               width={50}
               height={50}

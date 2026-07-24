@@ -1,4 +1,3 @@
-import blueOrb from "@/assets/blue-orb.png";
 import { PILLARS } from "@/config/landing.config";
 import Image from "next/image";
 
@@ -7,7 +6,7 @@ export function WhyBiliNow() {
     <section id="why" className="relative overflow-hidden py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <Image
-          src={blueOrb}
+          src="/blue-orb.png"
           alt=""
           aria-hidden
           priority
