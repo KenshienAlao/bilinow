@@ -1,7 +1,8 @@
-import { ArrowRight, Truck, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { SECTION_ID } from "@/config/landing.config";
+import { FaArrowRight, FaTruck } from "react-icons/fa";
+import { GrSecure } from "react-icons/gr";
 
 export function Hero() {
   return (
@@ -39,7 +40,7 @@ export function Hero() {
               size="lg"
               className="gradient-primary h-12 gap-2 px-6 text-base font-semibold text-primary-foreground shadow-elegant transition-transform hover:scale-[1.02]"
             >
-              Shop Now <ArrowRight className="h-4 w-4" />
+              Shop Now <FaArrowRight className="h-4 w-4" />
             </Button>
           </div>
         </div>
@@ -59,7 +60,7 @@ export function Hero() {
             <div className="absolute left-0 top-16 hidden animate-fade-in rounded-2xl border border-border bg-background/90 p-4 shadow-elegant backdrop-blur-xl sm:block">
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
-                  <Truck className="h-5 w-5" />
+                  <FaTruck className="h-5 w-5" />
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">Fast Delivery</p>
@@ -73,7 +74,7 @@ export function Hero() {
             <div className="absolute bottom-8 right-0 hidden animate-fade-in rounded-2xl border border-border bg-background/90 p-4 shadow-elegant backdrop-blur-xl sm:block">
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
-                  <ShieldCheck className="h-5 w-5" />
+                  <GrSecure className="h-5 w-5" />
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">

@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { LANDING_NAVLINKS } from "@/config/landing.config";
+import { CiMenuBurger } from "react-icons/ci";
+import { FaX } from "react-icons/fa6";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,9 +34,10 @@ export function Navbar() {
           <span className="grid h-9 w-9 place-items-center">
             <Image
               src="/favicon.ico"
-              alt="favicon"
+              alt="BiliNow logo"
               width={50}
               height={50}
+              className="h-auto w-auto"
               priority
             />
           </span>
@@ -71,7 +73,11 @@ export function Navbar() {
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? (
+            <FaX className="h-5 w-5" />
+          ) : (
+            <CiMenuBurger className="h-5 w-5" />
+          )}
         </button>
       </div>
 

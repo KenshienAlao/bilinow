@@ -1,7 +1,7 @@
 import { CATEGORIES } from "@/config/landing.config";
-import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 
 export function Categories() {
   return (
@@ -56,7 +56,7 @@ export function Categories() {
               priority
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
-            <ArrowUpRight className="absolute right-5 top-5 h-5 w-5 text-white opacity-70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <FaArrowRight className="absolute right-5 top-5 h-5 w-5 text-white opacity-70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             <div className="absolute bottom-0 left-0 p-7">
               <p className="text-xs font-semibold uppercase tracking-widest text-white/60">
                 Featured
@@ -96,7 +96,7 @@ export function Categories() {
                     {c.tag}
                   </p>
                 </div>
-                <ArrowUpRight className="h-4 w-4 shrink-0 text-primary/50 transition-all duration-300 group-hover:text-primary sm:absolute sm:right-5 sm:top-5 sm:opacity-0 sm:group-hover:translate-x-0.5 sm:group-hover:-translate-y-0.5 sm:group-hover:opacity-100" />
+                <FaArrowRight className="h-4 w-4 shrink-0 text-primary/50 transition-all duration-300 group-hover:text-primary sm:absolute sm:right-5 sm:top-5 sm:opacity-0 sm:group-hover:translate-x-0.5 sm:group-hover:-translate-y-0.5 sm:group-hover:opacity-100" />
               </div>
             </Link>
           ))}
