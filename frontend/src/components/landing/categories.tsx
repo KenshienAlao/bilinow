@@ -42,10 +42,10 @@ export function Categories() {
           </Link>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:grid-rows-3 md:auto-rows-32.5">
+        <div className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-4 md:grid-rows-3 md:auto-rows-32.5">
           <Link
             href="/"
-            className="group relative col-span-2 row-span-2 overflow-hidden rounded-3xl shadow-elegant transition-transform hover:-translate-y-1"
+            className="group relative col-span-1 row-span-1 min-h-70 overflow-hidden rounded-3xl shadow-elegant transition-transform hover:-translate-y-1 sm:col-span-2 sm:row-span-2 sm:min-h-0 md:col-span-2 md:row-span-2"
           >
             <Image
               src="/electronics.png"
@@ -74,30 +74,29 @@ export function Categories() {
             <Link
               key={c.name}
               href="#"
-              className="group relative overflow-hidden rounded-[2rem] border border-border/50 bg-background/50 p-6 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-primary/30 hover:bg-card hover:shadow-2xl hover:shadow-primary/5"
+              className="group relative overflow-hidden rounded-2xl border border-border/50 bg-background/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
             >
-              <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <ArrowUpRight className="absolute right-6 top-6 h-5 w-5 text-primary opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              <div className="relative z-10 flex h-full flex-col justify-between gap-6">
-                <div className="relative h-16 w-16 overflow-hidden rounded-2xl bg-primary/5 ring-1 ring-primary/10 transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/10 group-hover:ring-primary/20">
+              <div className="relative z-10 flex flex-row items-center gap-3 p-4 sm:flex-col sm:items-start sm:justify-between sm:gap-6 sm:p-6">
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl bg-primary/5 ring-1 ring-primary/10 transition-all duration-300 group-hover:bg-primary/10 group-hover:ring-primary/20 sm:h-14 sm:w-14 sm:rounded-2xl">
                   <Image
                     src={c.image}
                     alt={c.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover drop-shadow-sm transition-transform duration-500"
-                    priority
+                    sizes="56px"
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary">
+                <div className="min-w-0 flex-1">
+                  <h3 className="truncate text-sm font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary sm:text-base">
                     {c.name}
                   </h3>
-                  <p className="mt-1 text-sm font-medium text-muted-foreground/80">
+                  <p className="mt-0.5 truncate text-xs font-medium text-muted-foreground/80 sm:text-sm">
                     {c.tag}
                   </p>
                 </div>
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-primary/50 transition-all duration-300 group-hover:text-primary sm:absolute sm:right-5 sm:top-5 sm:opacity-0 sm:group-hover:translate-x-0.5 sm:group-hover:-translate-y-0.5 sm:group-hover:opacity-100" />
               </div>
             </Link>
           ))}
