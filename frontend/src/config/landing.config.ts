@@ -121,3 +121,30 @@ export const PILLARS = [
     desc: "A clean and user-friendly design that makes online shopping simple.",
   },
 ];
+
+export const FAQS = [
+  {
+    q: "What is BiliNow?",
+    a: "BiliNow is a modern e-commerce web application built as a portfolio project. It demonstrates a complete online shopping experience using modern web technologies.",
+  },
+  {
+    q: "Can I browse products?",
+    a: "Yes. You can browse products by category, search for items, and view product details. Product data is provided by DummyJSON for demonstration purposes.",
+  },
+  {
+    q: "Does it support secure login?",
+    a: "Yes. The backend is built with Spring Boot and Spring Security. It uses JWT authentication, BCrypt password hashing, HTTP-only cookies, refresh tokens, CORS configuration, and protected API routes to provide secure user authentication.",
+  },
+  {
+    q: "What database does BiliNow use?",
+    a: "BiliNow uses Supabase (PostgreSQL) to store user accounts, shopping carts, and other application data.",
+  },
+  {
+    q: "Can I place an order?",
+    a: "Yes. The application includes a complete shopping cart and checkout flow to demonstrate a real e-commerce experience.",
+  },
+  {
+    q: "What technologies were used?",
+    a: "BiliNow is built with Next.js, TypeScript, Tailwind CSS, TanStack Query, Spring Boot, Supabase (PostgreSQL), and DummyJSON for mock product data.",
+  },
+];

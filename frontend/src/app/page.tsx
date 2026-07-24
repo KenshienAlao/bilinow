@@ -1,4 +1,5 @@
 import { Categories } from "@/components/landing/categories";
+import { FAQ } from "@/components/landing/faq";
 import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/howitworks";
 import { Navbar } from "@/components/landing/navbar";
@@ -13,6 +14,7 @@ export default function Home() {
         <HowItWorks />
         <Categories />
         <WhyBiliNow />
+        <FAQ />
       </main>
     </div>
   );
