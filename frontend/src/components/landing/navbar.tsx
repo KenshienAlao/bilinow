@@ -6,6 +6,7 @@ import Image from "next/image";
 import { LANDING_NAVLINKS } from "@/config/landing.config";
 import { CiMenuBurger } from "react-icons/ci";
 import { FaX } from "react-icons/fa6";
+import Link from "next/link";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,7 +31,7 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-        <a href="#home" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <span className="grid h-9 w-9 place-items-center">
             <Image
               src="/favicon.png"
@@ -44,26 +45,29 @@ export function Navbar() {
           <span className="text-xl font-black tracking-tight text-foreground">
             Bili<span className="text-primary">Now</span>
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {LANDING_NAVLINKS.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={l.href}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button variant="ghost" className="font-semibold">
-            Log in
+          <Button asChild variant="ghost" className="font-semibold">
+            <Link href="/signin">Sign in</Link>
           </Button>
-          <Button className="gradient-primary font-semibold text-primary-foreground shadow-soft hover:opacity-90">
-            Sign up
+          <Button
+            asChild
+            className="gradient-primary font-semibold text-primary-foreground shadow-soft hover:opacity-90"
+          >
+            <Link href="/signup">Sign up</Link>
           </Button>
         </div>
 
@@ -99,11 +103,14 @@ export function Navbar() {
             </a>
           ))}
           <div className="mt-2 grid grid-cols-2 gap-2">
-            <Button variant="outline" className="font-semibold">
-              Log in
+            <Button asChild variant="outline" className="font-semibold">
+              <Link href="/signin">Sign in</Link>
             </Button>
-            <Button className="gradient-primary font-semibold text-primary-foreground">
-              Sign up
+            <Button
+              asChild
+              className="gradient-primary font-semibold text-primary-foreground"
+            >
+              <Link href="/signup">Sign up</Link>
             </Button>
           </div>
         </div>
