@@ -10,19 +10,31 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { LuLoaderCircle } from "react-icons/lu";
-
-const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-
-  console.log(data);
-};
+import { SignupSchema } from "@/validation/auth.validation";
+import { ZodError } from "zod";
 
 export function Form() {
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errorValidation, setErrorValidation] = useState<ZodError | null>(null);
+  const error = errorValidation?.issues[0].message;
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const result = SignupSchema.safeParse({
+      ...data,
+      terms: data.terms === "on",
+    });
+
+    if (!result.success) {
+      setErrorValidation(result.error);
+      return;
+    }
+
+    console.log(result.data);
+  };
 
   return (
     <form onSubmit={onSubmit} className="w-full space-y-4" autoComplete="off">
