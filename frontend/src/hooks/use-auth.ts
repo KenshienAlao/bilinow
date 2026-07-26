@@ -38,3 +38,11 @@ export const useSignup = () => {
     redirectRoute: ROUTES.AUTH.SIGNIN,
   });
 };
+
+export const useSignin = () => {
+  return useAuthMutation({
+    mutationFn: AuthService.signin,
+    mutationKey: [...authKeys, "signin"],
+    redirectRoute: ROUTES.HOME,
+  });
+};

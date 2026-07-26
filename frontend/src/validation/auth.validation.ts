@@ -40,7 +40,7 @@ export const SignupSchema = AuthSchema.refine(
   },
 );
 
-export const LoginSchema = AuthSchema.omit({
+export const SigninSchema = AuthSchema.omit({
   firstName: true,
   lastName: true,
   confirm: true,
@@ -50,4 +50,4 @@ export const LoginSchema = AuthSchema.omit({
 });
 
 export type Signup = z.infer<typeof SignupSchema>;
-export type Login = z.infer<typeof LoginSchema>;
+export type Signin = z.infer<typeof SigninSchema>;
