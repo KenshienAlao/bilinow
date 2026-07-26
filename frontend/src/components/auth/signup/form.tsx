@@ -12,13 +12,19 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { LuLoaderCircle } from "react-icons/lu";
 import { SignupSchema } from "@/validation/auth.validation";
 import { ZodError } from "zod";
+import { useSignup } from "@/hooks/use-auth";
 
 export function Form() {
+  const {
+    mutateAsync: signup,
+    isPending: loading,
+    error: signupError,
+  } = useSignup();
+
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [errorValidation, setErrorValidation] = useState<ZodError | null>(null);
-  const error = errorValidation?.issues[0].message;
+  const error = errorValidation?.issues[0].message || signupError?.message;
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,8 +38,7 @@ export function Form() {
       setErrorValidation(result.error);
       return;
     }
-
-    console.log(result.data);
+    signup(result.data);
   };
 
   return (

@@ -48,3 +48,6 @@ export const LoginSchema = AuthSchema.omit({
 }).extend({
   password: z.string().min(1, "Password is required"),
 });
+
+export type Signup = z.infer<typeof SignupSchema>;
+export type Login = z.infer<typeof LoginSchema>;
