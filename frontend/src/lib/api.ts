@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -13,7 +14,7 @@ export default api;
 api.interceptors.response.use(
   (res) => {
     if (res.data?.success === false) throw new Error(res.data.message);
-    return res.data;
+    return res;
   },
   async (error: AxiosError<{ message?: string }>) => {
     const req = error.config as typeof error.config & { _retry?: boolean };
