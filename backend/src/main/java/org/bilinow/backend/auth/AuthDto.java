@@ -30,6 +30,11 @@ public record AuthDto(
         @AssertTrue(message = "You need to accept the terms and conditions")
         Boolean terms
 ) {
+        public record signin(
+                String email,
+                String password
+        ){}
+
     public record response(
             String firstName,
             String lastName,

@@ -22,4 +22,9 @@ class AuthController {
 
         return ResponseEntity.ok(apiResponse.success("Success", authService.signup(entity)));
     }
+
+    @PostMapping("/signin")
+    public ResponseEntity<apiResponse<AuthDto.response>> signin(@Valid @RequestBody AuthDto.signin entity) {
+        return ResponseEntity.ok(apiResponse.success("Success", authService.signin(entity)));
+    }
 }
