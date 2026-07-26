@@ -1,8 +1,8 @@
 package org.bilinow.backend.auth;
 
-
 import jakarta.persistence.*;
 import lombok.*;
+import org.bilinow.backend.profile.ProfileModel;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,7 +12,6 @@ import java.time.Instant;
 @Data
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
@@ -21,6 +20,9 @@ public class AuthModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ProfileModel profile;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -39,4 +41,10 @@ public class AuthModel {
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
 
+    @Builder
+    public AuthModel(String email, String password, boolean terms) {
+        this.email = email;
+        this.password = password;
+        this.terms = terms;
+    }
 }

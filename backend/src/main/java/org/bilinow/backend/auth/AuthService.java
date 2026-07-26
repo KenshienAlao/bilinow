@@ -1,6 +1,5 @@
 package org.bilinow.backend.auth;
 
-
 import lombok.RequiredArgsConstructor;
 import org.bilinow.backend.profile.ProfileModel;
 import org.bilinow.backend.profile.ProfileRepository;
@@ -16,11 +15,11 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     public AuthDto.response signup(AuthDto entity) {
-        if (!entity.password().equals(entity.confirm())){
+        if (!entity.password().equals(entity.confirm())) {
             throw new IllegalArgumentException("Password do not match");
         }
 
-        if (authRepository.existsByEmail(entity.email())){
+        if (authRepository.existsByEmail(entity.email())) {
             throw new IllegalArgumentException("Email already exist");
         }
 
@@ -30,7 +29,9 @@ public class AuthService {
                 .terms(entity.terms())
                 .build());
 
+        
         var profile = profileRepository.save(ProfileModel.builder()
+                .user(auth)
                 .firstName(entity.firstName())
                 .lastName(entity.lastName())
                 .build());
@@ -38,8 +39,7 @@ public class AuthService {
         return new AuthDto.response(
                 profile.getFirstName(),
                 profile.getLastName(),
-                auth.getEmail()
-        );
+                auth.getEmail());
     }
 
 }
