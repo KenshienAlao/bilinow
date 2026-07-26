@@ -2,6 +2,8 @@ package org.bilinow.backend.profile;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProfileRepository extends JpaRepository<ProfileModel, Long> {
+import java.util.Optional;
 
+public interface ProfileRepository extends JpaRepository<ProfileModel, Long> {
+    Optional<ProfileModel> findByUserId(Long userId);
 }
