@@ -7,6 +7,7 @@ import { LANDING_NAVLINKS } from "@/config/landing.config";
 import { CiMenuBurger } from "react-icons/ci";
 import { FaX } from "react-icons/fa6";
 import Link from "next/link";
+import { ROUTES } from "@/config/routes.config";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,7 +32,7 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-        <Link href="/" className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <span className="grid h-9 w-9 place-items-center">
             <Image
               src="/favicon.png"
@@ -45,7 +46,7 @@ export function Navbar() {
           <span className="text-xl font-black tracking-tight text-foreground">
             Bili<span className="text-primary">Now</span>
           </span>
-        </Link>
+        </div>
 
         <nav className="hidden items-center gap-8 md:flex">
           {LANDING_NAVLINKS.map((l) => (
@@ -61,13 +62,13 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2 md:flex">
           <Button asChild variant="ghost" className="font-semibold">
-            <Link href="/signin">Sign in</Link>
+            <Link href={ROUTES.AUTH.SIGNIN}>Sign in</Link>
           </Button>
           <Button
             asChild
             className="gradient-primary font-semibold text-primary-foreground shadow-soft hover:opacity-90"
           >
-            <Link href="/signup">Sign up</Link>
+            <Link href={ROUTES.AUTH.SIGNUP}>Sign up</Link>
           </Button>
         </div>
 
@@ -104,13 +105,13 @@ export function Navbar() {
           ))}
           <div className="mt-2 grid grid-cols-2 gap-2">
             <Button asChild variant="outline" className="font-semibold">
-              <Link href="/signin">Sign in</Link>
+              <Link href={ROUTES.AUTH.SIGNIN}>Sign in</Link>
             </Button>
             <Button
               asChild
               className="gradient-primary font-semibold text-primary-foreground"
             >
-              <Link href="/signup">Sign up</Link>
+              <Link href={ROUTES.AUTH.SIGNUP}>Sign up</Link>
             </Button>
           </div>
         </div>

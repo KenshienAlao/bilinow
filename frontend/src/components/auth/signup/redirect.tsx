@@ -1,3 +1,4 @@
+import { ROUTES } from "@/config/routes.config";
 import Link from "next/link";
 
 export function Redirect() {
@@ -5,7 +6,7 @@ export function Redirect() {
     <div className="text-center text-sm text-muted-foreground mt-10">
       Already have an account?{" "}
       <Link
-        href="/signin"
+        href={ROUTES.AUTH.SIGNIN}
         className="font-medium text-foreground underline-offset-4 hover:underline"
       >
         Sign in
