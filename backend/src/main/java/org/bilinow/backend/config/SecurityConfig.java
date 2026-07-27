@@ -45,7 +45,7 @@ public class SecurityConfig {
                     @Override
                     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                             FilterChain filterChain) throws ServletException, IOException {
-                        var accessToken = WebUtils.getCookie(request, "access_token");
+                        var accessToken = WebUtils.getCookie(request, "bilinow-access_cookie");
                         if (accessToken != null) {
                             try {
                                 authenticate(jwtTokenConfig.extractEmail(accessToken.getValue()));
@@ -56,13 +56,13 @@ public class SecurityConfig {
                             }
                         }
 
-                        var refreshToken = WebUtils.getCookie(request, "refresh_token");
+                        var refreshToken = WebUtils.getCookie(request, "bilinow-refresh_cookie");
                         if (refreshToken != null) {
                             try {
                                 var email = jwtTokenConfig.extractEmail(refreshToken.getValue());
                                 authenticate(email);
                                 response.addHeader(
-                                        HttpHeaders.SET_COOKIE, ResponseCookie.from("access_token",
+                                        HttpHeaders.SET_COOKIE, ResponseCookie.from("bilinow-access_cookie",
                                                 jwtTokenConfig.generateAccessToken(email))
                                                 .httpOnly(true)
                                                 .secure(true)
