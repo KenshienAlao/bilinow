@@ -1,10 +1,18 @@
+import { API_ROUTES } from "@/config/api-routes";
+import { ROUTES } from "@/config/routes.config";
 import axios, { AxiosError } from "axios";
+
+export class SessionExpiredError extends Error {
+  constructor() {
+    super("Session expired");
+    this.name = "SessionExpiredError";
+  }
+}
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
   headers: {
-    "Content-Type": "application/json",
     Accept: "application/json",
   },
 });
@@ -13,11 +21,16 @@ export default api;
 
 api.interceptors.response.use(
   (res) => {
-    if (res.data?.success === false) throw new Error(res.data.message);
+    if (res.data?.success === false) {
+      throw new Error(res.data.message);
+    }
+
     return res;
   },
   async (error: AxiosError<{ message?: string }>) => {
-    const req = error.config as typeof error.config & { _retry?: boolean };
+    const req = error.config as typeof error.config & {
+      _retry?: boolean;
+    };
 
     if (
       (error.response?.status === 401 || error.response?.status === 403) &&
@@ -27,17 +40,15 @@ api.interceptors.response.use(
       req._retry = true;
 
       try {
-        await axios.post(
-          "/auth/refresh",
-          {},
-          {
-            withCredentials: true,
-          },
-        );
-
+        await api.post(`${API_ROUTES.AUTH.REFRESH}`);
         return api(req);
       } catch {
-        window.location.href = "/signin?clear_session=true";
+        if (typeof window !== "undefined") {
+          window.location.href = `${ROUTES.AUTH.SIGNIN}?clear_session=true`;
+          return;
+        }
+
+        throw new SessionExpiredError();
       }
     }
 
