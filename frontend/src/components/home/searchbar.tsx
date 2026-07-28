@@ -46,6 +46,7 @@ export function SearchBar({
   }, []);
 
   const search = (q: string) => {
+    if (!q.trim()) return;
     setOpen(false);
     router.push(`${ROUTES.SEARCH}?q=${encodeURIComponent(q)}`);
   };
