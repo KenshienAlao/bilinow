@@ -39,9 +39,9 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 
     // Rate Limiting & Caching
+    implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("com.bucket4j:bucket4j-core:8.10.1")
     implementation("com.github.ben-manes.caffeine:caffeine")
-
 
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
