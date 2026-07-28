@@ -8,7 +8,7 @@ type AuthLayoutProps = {
   subtitle: string;
   contentWidth?: number;
   backgroundImg?: string;
-  quote?: string;
+  quote: string;
 };
 
 export function AuthLayout({
@@ -82,8 +82,7 @@ export function AuthLayout({
 
             <div className="relative z-10 p-10">
               <p className="max-w-md text-sm leading-relaxed text-white/80">
-                {quote ??
-                  "Join thousands of shoppers discovering premium products, curated daily."}
+                {quote}
               </p>
             </div>
           </div>

@@ -13,6 +13,7 @@ import { LuLoaderCircle } from "react-icons/lu";
 import { SignupSchema } from "@/validation/auth.validation";
 import { ZodError } from "zod";
 import { useSignup } from "@/hooks/use-auth";
+import { ROUTES } from "@/config/routes.config";
 
 export function Form() {
   const {
@@ -136,14 +137,14 @@ export function Form() {
         >
           I agree to the{" "}
           <Link
-            href="/terms"
+            href={ROUTES.TOS.TERMS}
             className="font-medium text-foreground underline-offset-4 hover:underline"
           >
             Terms of Service{" "}
           </Link>
           and{" "}
           <Link
-            href="/privacy"
+            href={ROUTES.TOS.PRIVACY}
             className="font-medium text-foreground underline-offset-4 hover:underline"
           >
             Privacy Policy
