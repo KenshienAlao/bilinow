@@ -1,5 +1,5 @@
 import { Form } from "@/components/auth/signin/form";
-import { AuthLayout } from "@/components/ui/auth-layout";
+import { AuthLayout } from "@/components/layout/auth-layout";
 import { Redirect } from "@/components/auth/signin/redirect";
 
 export default function Signin() {
