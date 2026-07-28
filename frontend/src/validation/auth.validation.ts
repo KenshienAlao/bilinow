@@ -49,5 +49,5 @@ export const SigninSchema = AuthSchema.omit({
   password: z.string().min(1, "Password is required"),
 });
 
-export type Signup = z.infer<typeof SignupSchema>;
-export type Signin = z.infer<typeof SigninSchema>;
+export type SignupValidated = z.infer<typeof SignupSchema>;
+export type SigninValidated = z.infer<typeof SigninSchema>;
