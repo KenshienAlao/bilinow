@@ -4,7 +4,6 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import type { ProductInfo } from "@/model/product";
 import { FiLoader, FiSearch, FiX } from "react-icons/fi";
 import Image from "next/image";
 import { ROUTES } from "@/config/routes.config";
