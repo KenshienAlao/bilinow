@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { FaShirt } from "react-icons/fa6";
 import { GiSofa } from "react-icons/gi";
+import { ROUTES } from "@/config/routes.config";
 
 const SHORTCUT_ICONS: Record<string, React.ElementType> = {
   electronics: FaLaptop,
@@ -32,7 +33,7 @@ export function CategoryShortcuts() {
           return (
             <Link
               key={group.id}
-              href={{ pathname: "/q", query: { category: group.id } }}
+              href={{ pathname: ROUTES.SEARCH, query: { category: group.id } }}
               className="group flex w-20 shrink-0 flex-col items-center gap-2 rounded-xl border border-border bg-card p-3 transition-all duration-200 hover:border-primary/20 hover:bg-accent/40 sm:w-auto"
             >
               <div className="grid h-9 w-9 place-items-center rounded-lg bg-accent text-accent-foreground transition-all duration-200 group-hover:bg-primary group-hover:text-primary-foreground">
