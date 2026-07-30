@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductService {
 
     private final RestClient restClient;
-    private final WishListRepository wishListRepository;
+    private final CartRepository cartRepository;
     private final AuthRepository authRepository;
 
     @Transactional(readOnly = true)
@@ -51,23 +51,23 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public List<Integer> getWishListIds() {
+    public List<Integer> getCartIds() {
         var email = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return wishListRepository
+        return cartRepository
                 .findAllByUserEmail(email)
                 .stream()
-                .map(WishListModel::getProductId)
+                .map(CartModel::getProductId)
                 .toList();
     }
 
-    public Integer addWishList(Integer productId) {
+    public Integer addCart(Integer productId) {
         var email = SecurityContextHolder.getContext().getAuthentication().getName();
 
         var user = authRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        if (wishListRepository.existsByUserAndProductId(user, productId)) {
-            throw new IllegalStateException("Product already wished");
+        if (cartRepository.existsByUserAndProductId(user, productId)) {
+            throw new IllegalStateException("Product already in cart");
         }
 
         try {
@@ -76,19 +76,19 @@ public class ProductService {
             throw new IllegalArgumentException("Product does not exist");
         }
 
-        var result = wishListRepository.save(WishListModel.builder()
+        var result = cartRepository.save(CartModel.builder()
                 .user(user).productId(productId).build());
         return result.getProductId();
     }
 
-    public Integer removeWishList(Integer productId) {
+    public Integer removeCart(Integer productId) {
         var email = SecurityContextHolder.getContext().getAuthentication().getName();
         var user = authRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
-        if (!wishListRepository.existsByUserAndProductId(user, productId)) {
-            throw new IllegalStateException("Wishlist does not exist");
+        if (!cartRepository.existsByUserAndProductId(user, productId)) {
+            throw new IllegalStateException("Product not in cart");
         }
 
-        wishListRepository.deleteByUserAndProductId(user, productId);
+        cartRepository.deleteByUserAndProductId(user, productId);
 
         return productId;
     }

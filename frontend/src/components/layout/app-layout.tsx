@@ -2,7 +2,6 @@
 import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import {
-  FiHeart,
   FiHome,
   FiPackage,
   FiSettings,
@@ -16,7 +15,6 @@ import { useProfile } from "@/hooks/use-profile";
 
 const NAV = [
   { to: "/home", label: "Home", icon: FiHome, exact: true },
-  { to: "/wishlist", label: "Wishlist", icon: FiHeart },
   { to: "/cart", label: "Cart", icon: FiShoppingCart },
   { to: "/orders", label: "Orders", icon: FiPackage },
   { to: "/profile", label: "Profile", icon: FiUser },
@@ -24,7 +22,7 @@ const NAV = [
 ] as const;
 
 const MOBILE_NAV = NAV.filter((n) =>
-  ["/home", "/wishlist", "/cart", "/profile"].includes(n.to),
+  ["/home", "/cart", "/orders", "/profile"].includes(n.to),
 );
 
 type props = {

@@ -6,7 +6,6 @@ import { Product } from "@/model/product";
 import { ProductService } from "@/service/product.service";
 import { useQueries } from "@tanstack/react-query";
 import { ProductCarousel } from "./product-carousel";
-import { useIsWishlisted } from "@/lib/shop";
 
 function interleave<T>(arrays: T[][]): T[] {
   const result: T[] = [];

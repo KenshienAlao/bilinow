@@ -3,22 +3,22 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ProductInfo } from "@/model/product";
-import { finalPrice, formatPrice, useIsWishlisted } from "@/lib/shop";
-import { useToggleWishlist } from "@/hooks/use-togglewishlist";
-import { FiHeart, FiPackage, FiShield, FiStar, FiTruck } from "react-icons/fi";
+import { finalPrice, formatPrice } from "@/lib/shop";
+import { useToggleCart } from "@/hooks/use-togglecart";
+import { FiShoppingCart, FiCheck, FiStar } from "react-icons/fi";
 import { QuantityStepper } from "@/components/product/quantitystepper";
 
 interface ProductInfoSectionProps {
-  wished: boolean;
+  inCart: boolean;
   product: ProductInfo;
 }
 
 export function ProductInfoSection({
   product,
-  wished,
+  inCart,
 }: ProductInfoSectionProps) {
   const [quantity, setQuantity] = useState(1);
-  const toggleWishlist = useToggleWishlist();
+  const toggleCart = useToggleCart();
 
   const price = finalPrice(product);
   const inStock = product.stock > 0;
@@ -83,18 +83,23 @@ export function ProductInfoSection({
         />
         <button
           type="button"
-          onClick={() => toggleWishlist(product.id, wished)}
+          onClick={() => toggleCart(product.id, inCart)}
           className={cn(
             "inline-flex h-9 items-center gap-2 rounded-xl border border-border px-3 text-sm font-medium transition-colors",
-            wished
-              ? "border-destructive/30 text-destructive"
+            inCart
+              ? "border-primary/30 text-primary"
               : "text-muted-foreground hover:text-foreground",
           )}
         >
-          <FiHeart className={cn("h-4 w-4", wished && "fill-destructive")} />
-          {wished ? "Saved" : "Save"}
+          {inCart ? (
+            <FiCheck className="h-4 w-4" />
+          ) : (
+            <FiShoppingCart className="h-4 w-4" />
+          )}
+          {inCart ? "In cart" : "Add to cart"}
         </button>
       </div>
     </div>
   );
 }
+

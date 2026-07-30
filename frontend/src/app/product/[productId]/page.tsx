@@ -8,7 +8,7 @@ import { ProductDetailError } from "@/components/product/product-detail-error";
 import { ProductBreadcrumb } from "@/components/product/product-breadcrumb";
 import { ProductImageGallery } from "@/components/product/product-image-gallery";
 import { ProductInfoSection } from "@/components/product/product-info-section";
-import { useIsWishlisted } from "@/lib/shop";
+import { useIsInCart } from "@/lib/shop";
 
 type Props = {
   params: Promise<{ productId: number }>;
@@ -25,13 +25,13 @@ export default function ProductDetailPage({ params }: Props) {
     limit: 12,
   });
 
-  const { wished, isWishlistLoading } = useIsWishlisted(product?.id);
+  const { inCart, isCartLoading } = useIsInCart(product?.id);
 
   const relatedProducts = (related?.products ?? [])
     .filter((p) => p.id !== id)
     .slice(0, 10);
 
-  if (isLoading || isWishlistLoading) return <ProductDetailSkeleton />;
+  if (isLoading || isCartLoading) return <ProductDetailSkeleton />;
   if (isError || !product) return <ProductDetailError />;
 
   return (
@@ -39,7 +39,7 @@ export default function ProductDetailPage({ params }: Props) {
       <ProductBreadcrumb product={product} />
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
         <ProductImageGallery product={product} />
-        <ProductInfoSection product={product} wished={wished} />
+        <ProductInfoSection product={product} inCart={inCart} />
       </div>
       {relatedProducts.length > 0 && (
         <div className="mt-14">

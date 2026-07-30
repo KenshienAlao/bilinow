@@ -2,7 +2,7 @@ package org.bilinow.backend.auth;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.bilinow.backend.product.WishListModel;
+import org.bilinow.backend.product.CartModel;
 import org.bilinow.backend.profile.ProfileModel;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -28,7 +28,7 @@ public class AuthModel {
     private ProfileModel profile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<WishListModel> wishList = new HashSet<>();
+    private Set<CartModel> cart = new HashSet<>();
 
     @Column(nullable = false, unique = true)
     private String email;

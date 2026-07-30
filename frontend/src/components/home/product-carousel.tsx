@@ -7,7 +7,7 @@ import { FaChevronRight } from "react-icons/fa";
 import { ProductInfo } from "@/model/product";
 import { ProductCard } from "./product-card";
 import { ROUTES } from "@/config/routes.config";
-import { useWishlistIds } from "@/hooks/use-product";
+import { useCartIds } from "@/hooks/use-product";
 
 interface ProductCarouselProps {
   title: string;
@@ -30,7 +30,7 @@ export function ProductCarousel({
     trackRef.current?.scrollBy({ left: dir * 480, behavior: "smooth" });
   };
 
-  const { data: wishlistIds } = useWishlistIds();
+  const { data: cartIds } = useCartIds();
 
   return (
     <section className="space-y-4">
@@ -90,7 +90,7 @@ export function ProductCarousel({
             >
               <ProductCard
                 product={product}
-                wished={wishlistIds?.includes(product.id)}
+                inCart={cartIds?.includes(product.id)}
               />
             </div>
           ))}

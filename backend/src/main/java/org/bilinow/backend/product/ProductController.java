@@ -31,18 +31,18 @@ public class ProductController {
         return ResponseEntity.ok(ApiResponse.success("Success", productService.getById(productId)));
     }
 
-    @GetMapping("/wishlist/get")
-    public ResponseEntity<ApiResponse<List<Integer>>> getWishListIds() {
-        return ResponseEntity.ok(ApiResponse.success("Success", productService.getWishListIds()));
+    @GetMapping("/cart/get")
+    public ResponseEntity<ApiResponse<List<Integer>>> getCartIds() {
+        return ResponseEntity.ok(ApiResponse.success("Success", productService.getCartIds()));
     }
 
-    @PostMapping("/wishlist/add/{productId}")
-    public ResponseEntity<ApiResponse<Integer>> addWishlist(@PathVariable Integer productId) {
-        return ResponseEntity.ok(ApiResponse.success("Success", productService.addWishList(productId)));
+    @PostMapping("/cart/add/{productId}")
+    public ResponseEntity<ApiResponse<Integer>> addCart(@PathVariable Integer productId) {
+        return ResponseEntity.ok(ApiResponse.success("Success", productService.addCart(productId)));
     }
 
-    @DeleteMapping("/wishlist/remove/{productId}")
-    public ResponseEntity<ApiResponse<Integer>> removeWishlist(@PathVariable Integer productId) {
-        return ResponseEntity.ok(ApiResponse.success("Success", productService.removeWishList(productId)));
+    @DeleteMapping("/cart/remove/{productId}")
+    public ResponseEntity<ApiResponse<Integer>> removeCart(@PathVariable Integer productId) {
+        return ResponseEntity.ok(ApiResponse.success("Success", productService.removeCart(productId)));
     }
 }

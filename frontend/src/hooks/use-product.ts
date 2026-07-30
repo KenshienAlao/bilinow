@@ -1,10 +1,15 @@
 import { ApiReponse } from "@/lib/response";
 import { Product, ProductInfo } from "@/model/product";
 import { ProductService } from "@/service/product.service";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useQueries,
+} from "@tanstack/react-query";
 
 export const productKey = ["product"];
-export const wishlistKey = ["wishlist"];
+export const cartKey = ["cart"];
 
 interface useProductMutationProps<TData, TVariables> {
   mutationFn: (data: TVariables) => Promise<ApiReponse<TData>>;
@@ -21,16 +26,16 @@ function useProductMutation<TData, TVariables>({
     mutationKey,
     mutationFn,
     onMutate: async (newData) => {
-      await queryClient.cancelQueries({ queryKey: wishlistKey });
+      await queryClient.cancelQueries({ queryKey: cartKey });
 
-      const previous = queryClient.getQueryData(wishlistKey);
+      const previous = queryClient.getQueryData(cartKey);
 
       const targetId =
         typeof newData === `number` ? newData : (newData as { id: number }).id;
-      const isAdding = mutationKey.includes("add-wishlist");
+      const isAdding = mutationKey.includes("add-cart");
 
       queryClient.setQueryData(
-        wishlistKey,
+        cartKey,
         (old: ApiReponse<number[]> | undefined) => {
           if (!old || !old.data)
             return { message: "Success", data: isAdding ? [targetId] : [] };
@@ -54,20 +59,20 @@ function useProductMutation<TData, TVariables>({
 
     onError: (_err, _variables, context) => {
       if (context?.previous) {
-        queryClient.setQueryData(wishlistKey, context.previous);
+        queryClient.setQueryData(cartKey, context.previous);
       }
     },
 
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: wishlistKey });
+      queryClient.invalidateQueries({ queryKey: cartKey });
     },
   });
 }
 
-export function useWishlistIds() {
+export function useCartIds() {
   return useQuery<ApiReponse<number[]>, Error, number[]>({
-    queryKey: wishlistKey,
-    queryFn: () => ProductService.getWishlistIds(),
+    queryKey: cartKey,
+    queryFn: () => ProductService.getCartIds(),
     select: (res) => res.data!,
     staleTime: 1000 * 60 * 5,
   });
@@ -111,16 +116,34 @@ export function useSearchProductById(id: number) {
   });
 }
 
-export const useAddWishlist = () => {
+export function useSearchProductsByIds(ids: number[]) {
+  const productQueries = useQueries({
+    queries: ids.map((id) => ({
+      queryKey: [...productKey, "searched", id],
+      queryFn: () => ProductService.getById({ id }),
+      select: (res: ApiReponse<ProductInfo>) => res.data!,
+      staleTime: 1000 * 60 * 5,
+    })),
+  });
+
+  const products = productQueries
+    .map((q) => q.data)
+    .filter(Boolean) as ProductInfo[];
+  const isLoading = productQueries.some((q) => q.isLoading);
+
+  return { products, isLoading };
+}
+
+export const useAddCart = () => {
   return useProductMutation({
-    mutationFn: (id: number) => ProductService.addWishList(id),
-    mutationKey: [...productKey, "add-wishlist"],
+    mutationFn: (id: number) => ProductService.addCart(id),
+    mutationKey: [...productKey, "add-cart"],
   });
 };
 
-export const useRemoveWishlist = () => {
+export const useRemoveCart = () => {
   return useProductMutation({
-    mutationFn: (id: number) => ProductService.removeWishList(id),
-    mutationKey: [...productKey, "remove-wishlist"],
+    mutationFn: (id: number) => ProductService.removeCart(id),
+    mutationKey: [...productKey, "remove-cart"],
   });
 };

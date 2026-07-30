@@ -3,26 +3,25 @@ import { cn } from "@/lib/utils";
 import { ProductInfo } from "@/model/product";
 import Image from "next/image";
 import Link from "next/link";
-import { FaHeart, FaStar } from "react-icons/fa";
-import { useIsWishlisted } from "@/lib/shop";
-import { useToggleWishlist } from "@/hooks/use-togglewishlist";
-import { Button } from "../ui/button";
-import { FiShoppingCart } from "react-icons/fi";
+import { FaStar } from "react-icons/fa";
+import { useToggleCart } from "@/hooks/use-togglecart";
+import { FiShoppingCart, FiCheck } from "react-icons/fi";
+
 interface ProductCardProps {
   product: ProductInfo;
   className?: string;
-  wished?: boolean;
+  inCart?: boolean;
 }
 
 export function ProductCard({
   product,
   className,
-  wished = false,
+  inCart = false,
 }: ProductCardProps) {
   const price = product.price;
   const hasDiscount = product.discountPercentage >= 1;
 
-  const toggleWishlist = useToggleWishlist();
+  const toggleCart = useToggleCart();
 
   return (
     <article
@@ -55,24 +54,28 @@ export function ProductCard({
 
         <button
           type="button"
-          aria-label="wishlist"
+          aria-label={inCart ? "Remove from cart" : "Add to cart"}
           onClick={() => {
-            toggleWishlist(product.id, wished);
+            toggleCart(product.id, inCart);
           }}
-          className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-border bg-background/90 text-muted-foreground transition-colors hover:text-destructive"
+          className={cn(
+            "absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-border bg-background/90 transition-colors",
+            inCart
+              ? "border-primary/30 text-primary"
+              : "text-muted-foreground hover:text-primary",
+          )}
         >
-          <FaHeart
-            className={cn(
-              "h-4 w-4",
-              wished && "fill-destructive text-destructive",
-            )}
-          />
+          {inCart ? (
+            <FiCheck className="h-4 w-4" />
+          ) : (
+            <FiShoppingCart className="h-4 w-4" />
+          )}
         </button>
       </div>
 
       <div className="flex flex-1 flex-col gap-2 p-4">
         <Link
-          href="/product/$productId"
+          href={`${ROUTES.PRODUCT}/${product.id}`}
           className="line-clamp-2 text-sm font-medium leading-snug transition-colors hover:text-primary"
         >
           {product.title}
@@ -95,17 +98,6 @@ export function ProductCard({
               {price}
             </p>
           </div>
-          {/* <Button
-            size="icon"
-            className="h-9 w-9 shrink-0 rounded-xl"
-            aria-label={`Add ${product.title} to cart`}
-            onClick={() => {
-              // addToCart(product);
-              // toast.success("Added to cart");
-            }}
-          >
-            <FiShoppingCart className="h-4 w-4" />
-          </Button> */}
         </div>
       </div>
     </article>

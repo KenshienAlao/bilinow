@@ -25,23 +25,23 @@ export const ProductService = {
     return res.data;
   },
 
-  getWishlistIds: async (): Promise<ApiReponse<number[]>> => {
+  getCartIds: async (): Promise<ApiReponse<number[]>> => {
     const res = await api.get<ApiReponse<number[]>>(
-      `${API_ROUTES.PRODUCTS.WISHLIST.GET}`,
+      `${API_ROUTES.PRODUCTS.CART.GET}`,
     );
     return res.data;
   },
 
-  addWishList: async (id: number) => {
+  addCart: async (id: number) => {
     const res = await api.post<ApiReponse<number>>(
-      `${API_ROUTES.PRODUCTS.WISHLIST.ADD}/${id}`,
+      `${API_ROUTES.PRODUCTS.CART.ADD}/${id}`,
     );
     return res.data;
   },
 
-  removeWishList: async (id: number) => {
+  removeCart: async (id: number) => {
     const res = await api.delete<ApiReponse<void>>(
-      `${API_ROUTES.PRODUCTS.WISHLIST.REMOVE}/${id}`,
+      `${API_ROUTES.PRODUCTS.CART.REMOVE}/${id}`,
     );
     return res.data;
   },

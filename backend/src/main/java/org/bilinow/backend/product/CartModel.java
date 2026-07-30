@@ -15,8 +15,8 @@ import java.time.Instant;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "wistlist")
-public class WishListModel {
+@Table(name = "cart")
+public class CartModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class WishListModel {
     private Instant createdAt;
 
     @Builder
-    public WishListModel(AuthModel user, Integer productId) {
+    public CartModel(AuthModel user, Integer productId) {
         this.user = user;
         this.productId = productId;
     }

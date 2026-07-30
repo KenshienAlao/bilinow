@@ -9,10 +9,10 @@ export const API_ROUTES = {
   },
   PRODUCTS: {
     GET: "/api/products",
-    WISHLIST: {
-      GET: "/api/products/wishlist/get",
-      ADD: "/api/products/wishlist/add",
-      REMOVE: "/api/products/wishlist/remove",
+    CART: {
+      GET: "/api/products/cart/get",
+      ADD: "/api/products/cart/add",
+      REMOVE: "/api/products/cart/remove",
     },
   },
 };
