@@ -1,16 +1,17 @@
 import { cn } from "@/lib/utils";
 import { HTMLAttributes } from "react";
 
-function Skeleton({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+export function Skeleton({
+  className,
+  ...props
+}: HTMLAttributes<HTMLSpanElement>) {
   return (
-    <div
-      className={cn("animate-pulse rounded-md bg-primary/10", className)}
+    <span
+      className={cn("animate-pulse inline-block bg-primary/10", className)}
       {...props}
     />
   );
 }
-
-export { Skeleton };
 
 function ProductCardSkeleton() {
   return (
