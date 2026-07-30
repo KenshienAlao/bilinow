@@ -14,7 +14,10 @@ export const finalPrice = (p: {
 
 export const formatPrice = (value: number) => phpFormatter.format(value);
 
-export const useIsWishlisted = (id: number) => {
-  const { data: wishlistIds } = useWishlistIds();
-  return wishlistIds?.includes(id) ?? false;
+export const useIsWishlisted = (id?: number) => {
+  const { data: wishlistIds, isLoading } = useWishlistIds();
+  return {
+    wished: wishlistIds?.includes(id ?? -1) ?? false,
+    isWishlistLoading: isLoading,
+  };
 };

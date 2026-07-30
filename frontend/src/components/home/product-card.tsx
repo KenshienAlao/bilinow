@@ -6,21 +6,28 @@ import Link from "next/link";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { useIsWishlisted } from "@/lib/shop";
 import { useToggleWishlist } from "@/hooks/use-togglewishlist";
+import { Button } from "../ui/button";
+import { FiShoppingCart } from "react-icons/fi";
 interface ProductCardProps {
   product: ProductInfo;
   className?: string;
+  wished?: boolean;
 }
 
-export function ProductCard({ product, className }: ProductCardProps) {
+export function ProductCard({
+  product,
+  className,
+  wished = false,
+}: ProductCardProps) {
   const price = product.price;
   const hasDiscount = product.discountPercentage >= 1;
-  const wished = useIsWishlisted(product.id);
+
   const toggleWishlist = useToggleWishlist();
 
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-soft",
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-primary/30",
         className,
       )}
     >
@@ -37,7 +44,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
             height={200}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-contain p-4"
           />
         </Link>
         {hasDiscount && (
@@ -87,22 +94,17 @@ export function ProductCard({ product, className }: ProductCardProps) {
             <p className="truncate text-base font-semibold text-primary">
               {price}
             </p>
-            {hasDiscount && (
-              <p className="text-xs text-muted-foreground line-through">
-                {product.discountPercentage}
-              </p>
-            )}
           </div>
           {/* <Button
             size="icon"
             className="h-9 w-9 shrink-0 rounded-xl"
             aria-label={`Add ${product.title} to cart`}
             onClick={() => {
-              addToCart(product);
-              toast.success("Added to cart");
+              // addToCart(product);
+              // toast.success("Added to cart");
             }}
           >
-            <ShoppingCart className="h-4 w-4" />
+            <FiShoppingCart className="h-4 w-4" />
           </Button> */}
         </div>
       </div>

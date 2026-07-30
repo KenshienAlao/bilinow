@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ProductInfo } from "@/model/product";
 import { ProductCard } from "./product-card";
+import { useWishlistIds } from "@/hooks/use-product";
 
 export function ProductGrid({
   products,
@@ -9,6 +10,8 @@ export function ProductGrid({
   products: ProductInfo[];
   className?: string;
 }) {
+  const { data: wishlistIds } = useWishlistIds();
+
   return (
     <div
       className={cn(
@@ -17,7 +20,11 @@ export function ProductGrid({
       )}
     >
       {products.map((p) => (
-        <ProductCard key={`${p.meta}-${p.id}`} product={p} />
+        <ProductCard
+          key={`${p.meta}-${p.id}`}
+          product={p}
+          wished={wishlistIds?.includes(p.id)}
+        />
       ))}
     </div>
   );

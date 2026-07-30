@@ -9,12 +9,15 @@ import { FiHeart, FiPackage, FiShield, FiStar, FiTruck } from "react-icons/fi";
 import { QuantityStepper } from "@/components/product/quantitystepper";
 
 interface ProductInfoSectionProps {
+  wished: boolean;
   product: ProductInfo;
 }
 
-export function ProductInfoSection({ product }: ProductInfoSectionProps) {
+export function ProductInfoSection({
+  product,
+  wished,
+}: ProductInfoSectionProps) {
   const [quantity, setQuantity] = useState(1);
-  const wished = useIsWishlisted(product.id);
   const toggleWishlist = useToggleWishlist();
 
   const price = finalPrice(product);
