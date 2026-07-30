@@ -38,7 +38,7 @@ export function ProductInfoSection({
 
       <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
         <span className="inline-flex items-center gap-1.5">
-          <FiStar className="h-4 w-4 fill-warning text-warning" />
+          <FiStar className="h-4 w-4 fill-yellow-400 text-yellow-400" />
           <span className="font-medium">{product.rating?.toFixed(1)}</span>
           <span className="text-muted-foreground">
             ({product.reviews?.length ?? 0} reviews)
@@ -75,34 +75,6 @@ export function ProductInfoSection({
       <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
         {product.description}
       </p>
-
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
-        {[
-          {
-            icon: FiTruck,
-            text: product.shippingInformation ?? "Ships in 2–4 days",
-          },
-          {
-            icon: FiShield,
-            text: product.warrantyInformation ?? "1 year warranty",
-          },
-          {
-            icon: FiPackage,
-            text: product.returnPolicy ?? "30 days return policy",
-          },
-        ].map((f) => (
-          <div
-            key={f.text}
-            className="flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2.5"
-          >
-            <f.icon className="h-4 w-4 shrink-0 text-primary" />
-            <span className="min-w-0 truncate text-xs text-muted-foreground">
-              {f.text}
-            </span>
-          </div>
-        ))}
-      </div>
-
       <div className="mt-7 flex flex-wrap items-center gap-4">
         <QuantityStepper
           value={quantity}
