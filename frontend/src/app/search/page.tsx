@@ -18,6 +18,12 @@ function QueryPageLayout() {
   const categoryId = searchParams.get("category");
   const subcategory = searchParams.get("subcategory");
 
+  useEffect(() => {
+    if (!q && !categoryId) {
+      router.replace(ROUTES.HOME);
+    }
+  }, [q, categoryId, router]);
+
   const group = (() => {
     return CATEGORY_GROUPS.find((g) => g.id === categoryId);
   })();
