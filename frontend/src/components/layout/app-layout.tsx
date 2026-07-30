@@ -16,7 +16,6 @@ import { useProfile } from "@/hooks/use-profile";
 
 const NAV = [
   { to: "/home", label: "Home", icon: FiHome, exact: true },
-  { to: "/search", label: "Search", icon: FiSearch },
   { to: "/wishlist", label: "Wishlist", icon: FiHeart },
   { to: "/cart", label: "Cart", icon: FiShoppingCart },
   { to: "/orders", label: "Orders", icon: FiPackage },
@@ -25,7 +24,7 @@ const NAV = [
 ] as const;
 
 const MOBILE_NAV = NAV.filter((n) =>
-  ["/", "/search", "/wishlist", "/cart", "/profile"].includes(n.to),
+  ["/home", "/wishlist", "/cart", "/profile"].includes(n.to),
 );
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -109,24 +108,22 @@ export function AppShell({ children }: { children: ReactNode }) {
         aria-label="Mobile"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur lg:hidden"
       >
-        <div className="mx-auto grid max-w-lg grid-cols-5">
-          {MOBILE_NAV.map((item) => {
-            return (
-              <Link
-                key={item.to}
-                href={item.to}
-                className={cn(
-                  "flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors",
-                  "text-muted-foreground",
-                )}
-              >
-                <span className="relative">
-                  <item.icon className={cn("h-5 w-5")} />
-                </span>
-                {item.label}
-              </Link>
-            );
-          })}
+        <div className="mx-auto grid max-w-lg grid-cols-4 place-items-center">
+          {MOBILE_NAV.map((item) => (
+            <Link
+              key={item.to}
+              href={item.to}
+              className={cn(
+                "flex flex-col items-center justify-center gap-1 py-2.5 text-center text-[11px] font-medium transition-colors",
+                "text-muted-foreground",
+              )}
+            >
+              <span className="relative">
+                <item.icon className="h-5 w-5" />
+              </span>
+              {item.label}
+            </Link>
+          ))}
         </div>
       </nav>
     </div>
