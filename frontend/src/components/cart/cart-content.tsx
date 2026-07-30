@@ -9,6 +9,7 @@ import { FiShoppingCart, FiTrash2 } from "react-icons/fi";
 import Link from "next/link";
 import { ROUTES } from "@/config/routes.config";
 import { CartSummary } from "@/components/cart/cart-summary";
+import { CartSkeleton } from "@/components/cart/cart-skeleton";
 import {
   useCartIds,
   useRemoveCart,
@@ -16,7 +17,7 @@ import {
 } from "@/hooks/use-product";
 
 export function CartContent() {
-  const { data: cart } = useCartIds();
+  const { data: cart, isLoading: isCartLoading } = useCartIds();
   const { mutate: removeCart } = useRemoveCart();
   const [selected, setSelected] = useState<number[]>([]);
   const cartLength = cart?.length ?? 0;
@@ -39,6 +40,10 @@ export function CartContent() {
   const total = products
     .filter((p) => effective.includes(p.id))
     .reduce((sum, p) => sum + finalPrice(p), 0);
+
+  if (isCartLoading) {
+    return <CartSkeleton />;
+  }
 
   if (cartLength === 0) {
     return (
