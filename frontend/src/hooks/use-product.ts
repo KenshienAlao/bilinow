@@ -126,11 +126,18 @@ export function useSearchProductsByIds(ids: number[]) {
     })),
   });
 
-  const products = productQueries
-    .map((q) => q.data)
-    .filter(Boolean) as ProductInfo[];
-  const isLoading = productQueries.some((q) => q.isLoading);
+  const products: ProductInfo[] = [];
+  let isLoading = false;
 
+  for (const q of productQueries) {
+    if (q.data) {
+      products.push(q.data);
+    }
+
+    if (!isLoading && q.isLoading) {
+      isLoading = true;
+    }
+  }
   return { products, isLoading };
 }
 

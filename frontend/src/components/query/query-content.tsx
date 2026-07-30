@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, redirect } from "next/navigation";
 import { CATEGORY_GROUPS, PAGE_SIZE } from "@/config/product.config";
 import { AppShell } from "@/components/layout/app-layout";
 import { useInfiniteProducts } from "@/hooks/use-infinite";
@@ -18,11 +18,9 @@ export function QueryContent() {
   const categoryId = searchParams.get("category");
   const subcategory = searchParams.get("subcategory");
 
-  useEffect(() => {
-    if (!q && !categoryId) {
-      router.replace(ROUTES.HOME);
-    }
-  }, [q, categoryId, router]);
+  if (!q && !categoryId) {
+    redirect(ROUTES.HOME);
+  }
 
   const group = (() => {
     return CATEGORY_GROUPS.find((g) => g.id === categoryId);

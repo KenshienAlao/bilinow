@@ -24,9 +24,13 @@ export function ProductDetailContent({ productId }: Props) {
 
   const { inCart, isCartLoading } = useIsInCart(product?.id);
 
-  const relatedProducts = (related?.products ?? [])
-    .filter((p) => p.id !== productId)
-    .slice(0, 10);
+  const relatedProducts = [];
+  for (const p of related?.products ?? []) {
+    if (p.id !== productId) {
+      relatedProducts.push(p);
+      if (relatedProducts.length === 10) break;
+    }
+  }
 
   if (isLoading || isCartLoading) return <ProductDetailSkeleton />;
   if (isError || !product) return <ProductDetailError />;

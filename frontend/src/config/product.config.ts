@@ -59,21 +59,3 @@ export const CATEGORY_GROUPS = [
     categories: ["groceries"],
   },
 ];
-
-export const PERKS = [
-  {
-    icon: FaTruck,
-    title: "Fast Delivery",
-    text: "Delivered to your doorstep",
-  },
-  {
-    icon: FaShield,
-    title: "Secure Checkout",
-    text: "Shop with confidence",
-  },
-  {
-    icon: FiRotateCcw,
-    title: "Easy Returns",
-    text: "Hassle-free returns",
-  },
-];

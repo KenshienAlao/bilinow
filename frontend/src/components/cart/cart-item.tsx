@@ -44,6 +44,7 @@ export function CartItem({ id, selected, onSelect, onRemove }: CartItemProps) {
         <Image
           src={product.thumbnail}
           alt={product.title}
+          sizes="64px"
           fill
           className="object-contain p-1"
         />

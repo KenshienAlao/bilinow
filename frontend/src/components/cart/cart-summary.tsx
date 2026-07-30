@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import { formatPrice } from "@/lib/shop";
 
 interface props {
   cartLength: number;
@@ -9,6 +10,7 @@ interface props {
 
 export function CartSummary({ cartLength, effective, total }: props) {
   const router = useRouter();
+  const price = formatPrice(total);
   return (
     <aside className="lg:sticky lg:top-24 lg:h-fit">
       <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
@@ -24,12 +26,7 @@ export function CartSummary({ cartLength, effective, total }: props) {
           </div>
           <div className="flex justify-between border-t border-border pt-3 text-base">
             <dt className="font-medium">Total</dt>
-            <dd className="font-semibold text-primary">
-              {new Intl.NumberFormat("en-PH", {
-                style: "currency",
-                currency: "PHP",
-              }).format(total)}
-            </dd>
+            <dd className="font-semibold text-primary">{price}</dd>
           </div>
         </dl>
         <Button
