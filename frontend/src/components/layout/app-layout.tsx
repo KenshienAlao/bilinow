@@ -1,17 +1,17 @@
 "use client";
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import {
   FiHeart,
   FiHome,
   FiPackage,
-  FiSearch,
   FiSettings,
   FiShoppingCart,
   FiUser,
 } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useProfile } from "@/hooks/use-profile";
 
 const NAV = [
@@ -27,7 +27,12 @@ const MOBILE_NAV = NAV.filter((n) =>
   ["/home", "/wishlist", "/cart", "/profile"].includes(n.to),
 );
 
-export function AppShell({ children }: { children: ReactNode }) {
+type props = {
+  children: ReactNode;
+};
+
+export function AppShell({ children }: props) {
+  const pathname = usePathname();
   const { data: user } = useProfile();
 
   return (
@@ -52,13 +57,20 @@ export function AppShell({ children }: { children: ReactNode }) {
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
             {NAV.map((item) => {
+              const isActive =
+                "exact" in item && item.exact
+                  ? pathname === item.to
+                  : pathname.startsWith(item.to);
+
               return (
                 <Link
                   key={item.to}
                   href={item.to}
                   className={cn(
                     "relative flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-colors",
-                    "bg-accent text-accent-foreground",
+                    isActive
+                      ? "bg-accent text-accent-foreground"
+                      : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
                   )}
                 >
                   <span className="relative">
@@ -109,21 +121,30 @@ export function AppShell({ children }: { children: ReactNode }) {
         className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur lg:hidden"
       >
         <div className="mx-auto grid max-w-lg grid-cols-4 place-items-center">
-          {MOBILE_NAV.map((item) => (
-            <Link
-              key={item.to}
-              href={item.to}
-              className={cn(
-                "flex flex-col items-center justify-center gap-1 py-2.5 text-center text-[11px] font-medium transition-colors",
-                "text-muted-foreground",
-              )}
-            >
-              <span className="relative">
-                <item.icon className="h-5 w-5" />
-              </span>
-              {item.label}
-            </Link>
-          ))}
+          {MOBILE_NAV.map((item) => {
+            const isActive =
+              "exact" in item && item.exact
+                ? pathname === item.to
+                : pathname.startsWith(item.to);
+
+            return (
+              <Link
+                key={item.to}
+                href={item.to}
+                className={cn(
+                  "flex flex-col items-center justify-center gap-1 py-2.5 text-center text-[11px] font-medium transition-colors",
+                  isActive
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                <span className="relative">
+                  <item.icon className="h-5 w-5" />
+                </span>
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
       </nav>
     </div>
